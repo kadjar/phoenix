@@ -1,6 +1,7 @@
 {
   "name": "elixir-phoenix",
-  "main": "path/to/main.css",
+  "main": "phoenix.js",
+  "homepage": "https://github.com/phoenixframework/phoenix",
   "ignore": [
     ".jshintrc",
     "**/*.txt"
