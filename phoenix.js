@@ -1,19 +1,17 @@
-define("phoenix", ["exports"], function(__exports__) {
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+"use strict";
+
+var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+define("phoenix", ["exports"], function (__exports__) {
   "use strict";
 
   function __es6_export__(name, value) {
     __exports__[name] = value;
   }
 
-  "use strict";
-
-  var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
   var SOCKET_STATES = { connecting: 0, open: 1, closing: 2, closed: 3 };
   var CHANNEL_EVENTS = {
     close: "phx_close",
@@ -264,7 +262,7 @@ define("phoenix", ["exports"], function(__exports__) {
     return Channel;
   })();
 
-  exports.Channel = Channel;
+  __es6_export__("Channel", Channel);
 
   var Socket = (function () {
 
@@ -291,7 +289,6 @@ define("phoenix", ["exports"], function(__exports__) {
 
       _classCallCheck(this, Socket);
 
-      this.states = SOCKET_STATES;
       this.stateChangeCallbacks = { open: [], close: [], error: [], message: [] };
       this.flushEveryMs = 50;
       this.reconnectTimer = null;
@@ -451,11 +448,11 @@ define("phoenix", ["exports"], function(__exports__) {
       key: "connectionState",
       value: function connectionState() {
         switch (this.conn && this.conn.readyState) {
-          case this.states.connecting:
+          case SOCKET_STATES.connecting:
             return "connecting";
-          case this.states.open:
+          case SOCKET_STATES.open:
             return "open";
-          case this.states.closing:
+          case SOCKET_STATES.closing:
             return "closing";
           default:
             return "closed";
@@ -560,7 +557,7 @@ define("phoenix", ["exports"], function(__exports__) {
     return Socket;
   })();
 
-  exports.Socket = Socket;
+  __es6_export__("Socket", Socket);
 
   var LongPoller = (function () {
     function LongPoller(endPoint) {
@@ -575,10 +572,9 @@ define("phoenix", ["exports"], function(__exports__) {
       this.onerror = function () {}; // noop
       this.onmessage = function () {}; // noop
       this.onclose = function () {}; // noop
-      this.states = SOCKET_STATES;
       this.upgradeEndpoint = this.normalizeEndpoint(endPoint);
       this.pollEndpoint = this.upgradeEndpoint + (/\/$/.test(endPoint) ? "poll" : "/poll");
-      this.readyState = this.states.connecting;
+      this.readyState = SOCKET_STATES.connecting;
 
       this.poll();
     }
@@ -597,7 +593,7 @@ define("phoenix", ["exports"], function(__exports__) {
       key: "closeAndRetry",
       value: function closeAndRetry() {
         this.close();
-        this.readyState = this.states.connecting;
+        this.readyState = SOCKET_STATES.connecting;
       }
     }, {
       key: "ontimeout",
@@ -610,7 +606,7 @@ define("phoenix", ["exports"], function(__exports__) {
       value: function poll() {
         var _this11 = this;
 
-        if (!(this.readyState === this.states.open || this.readyState === this.states.connecting)) {
+        if (!(this.readyState === SOCKET_STATES.open || this.readyState === SOCKET_STATES.connecting)) {
           return;
         }
 
@@ -638,7 +634,7 @@ define("phoenix", ["exports"], function(__exports__) {
               _this11.poll();
               break;
             case 410:
-              _this11.readyState = _this11.states.open;
+              _this11.readyState = SOCKET_STATES.open;
               _this11.onopen();
               _this11.poll();
               break;
@@ -667,7 +663,7 @@ define("phoenix", ["exports"], function(__exports__) {
     }, {
       key: "close",
       value: function close(code, reason) {
-        this.readyState = this.states.closed;
+        this.readyState = SOCKET_STATES.closed;
         this.onclose();
       }
     }]);
@@ -675,7 +671,7 @@ define("phoenix", ["exports"], function(__exports__) {
     return LongPoller;
   })();
 
-  exports.LongPoller = LongPoller;
+  __es6_export__("LongPoller", LongPoller);
 
   var Ajax = (function () {
     function Ajax() {
@@ -747,9 +743,9 @@ define("phoenix", ["exports"], function(__exports__) {
     return Ajax;
   })();
 
-  exports.Ajax = Ajax;
+  __es6_export__("Ajax", Ajax);
 
   Ajax.states = { complete: 4 };
 });
 
-//# sourceMappingURL=phoenix.js.map
+},{}]},{},[1]);
