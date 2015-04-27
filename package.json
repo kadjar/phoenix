@@ -1,0 +1,22 @@
+{
+  "name": "phoenixjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "phoenix.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kadjar/phoenix.git"
+  },
+  "author": "Garrett Amini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kadjar/phoenix/issues"
+  },
+  "homepage": "https://github.com/kadjar/phoenix",
+  "dependencies": {
+    "babelify": "^6.0.2"
+  }
+}
